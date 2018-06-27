@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="app">
       <router-view></router-view>
       <FooterGuide />
     </div>
@@ -16,7 +16,9 @@ export default {
 }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
-  .app
-    color: #000
+<style scoped lang="stylus" rel="stylesheet/stylus">
+  #app
+    width 100%
+    height 100%
+    background-color #f5f5f5
 </style>
