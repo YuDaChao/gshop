@@ -1,10 +1,10 @@
 <template>
-    <div>Profile</div>
+    <div>MSite</div>
 </template>
 
 <script>
 export default {
-  name: 'Profile'
+  name: 'MSite'
 }
 </script>
 
