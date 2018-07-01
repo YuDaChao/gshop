@@ -21,6 +21,7 @@ export default {
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
   .search
+    overflow hidden
     .header
       position fixed
       top: 0
