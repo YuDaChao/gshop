@@ -2,7 +2,7 @@
   <!--首页-->
   <div class="msite">
     <!--首页头部-->
-    <HanderNav title="昌平区北七家宏福科技园(337省道北)">
+    <HanderNav :title="address.name">
       <span class="header-search" slot="left">
         <i class="iconfont icon-sousuo"></i>
       </span>
@@ -14,72 +14,10 @@
     <div class="msite-nav">
       <div class="swiper-container">
        <div class="swiper-wrapper">
-         <div class="swiper-slide">
-           <a href="javascript:" class="nav-item">
-             <img src="./images/nav/1.jpg" alt="#">
-             <span>甜品饮品</span>
-           </a>
-           <a href="javascript:" class="nav-item">
-             <img src="./images/nav/2.jpg" alt="#">
-             <span>甜品饮品</span>
-           </a>
-           <a href="javascript:" class="nav-item">
-             <img src="./images/nav/3.jpg" alt="#">
-             <span>甜品饮品</span>
-           </a>
-           <a href="javascript:" class="nav-item">
-             <img src="./images/nav/4.jpg" alt="#">
-             <span>甜品饮品</span>
-           </a>
-           <a href="javascript:" class="nav-item">
-             <img src="./images/nav/5.jpg" alt="#">
-             <span>甜品饮品</span>
-           </a>
-           <a href="javascript:" class="nav-item">
-             <img src="./images/nav/6.jpg" alt="#">
-             <span>甜品饮品</span>
-           </a>
-           <a href="javascript:" class="nav-item">
-             <img src="./images/nav/7.jpg" alt="#">
-             <span>甜品饮品</span>
-           </a>
-           <a href="javascript:" class="nav-item">
-             <img src="./images/nav/8.jpg" alt="#">
-             <span>甜品饮品</span>
-           </a>
-         </div>
-         <div class="swiper-slide">
-           <a href="javascript:" class="nav-item">
-             <img src="./images/nav/1.jpg" alt="#">
-             <span>甜品饮品</span>
-           </a>
-           <a href="javascript:" class="nav-item">
-             <img src="./images/nav/2.jpg" alt="#">
-             <span>甜品饮品</span>
-           </a>
-           <a href="javascript:" class="nav-item">
-             <img src="./images/nav/3.jpg" alt="#">
-             <span>甜品饮品</span>
-           </a>
-           <a href="javascript:" class="nav-item">
-             <img src="./images/nav/4.jpg" alt="#">
-             <span>甜品饮品</span>
-           </a>
-           <a href="javascript:" class="nav-item">
-             <img src="./images/nav/5.jpg" alt="#">
-             <span>甜品饮品</span>
-           </a>
-           <a href="javascript:" class="nav-item">
-             <img src="./images/nav/6.jpg" alt="#">
-             <span>甜品饮品</span>
-           </a>
-           <a href="javascript:" class="nav-item">
-             <img src="./images/nav/7.jpg" alt="#">
-             <span>甜品饮品</span>
-           </a>
-           <a href="javascript:" class="nav-item">
-             <img src="./images/nav/8.jpg" alt="#">
-             <span>甜品饮品</span>
+         <div class="swiper-slide" v-for="(categorys, index) in categorysArr" :key="index">
+           <a href="javascript:" class="nav-item" v-for="(category, index) in categorys" :key="index">
+             <img :src="baseImgUrl+category.image_url" alt="#">
+             <span>{{category.title}}</span>
            </a>
          </div>
        </div>
@@ -100,6 +38,7 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
 import Swiper from 'swiper'
 import 'swiper/dist/css/swiper.min.css'
 import HanderNav from '../../components/HanderNav/HanderNav'
@@ -112,13 +51,40 @@ export default {
     ShopList
   },
   mounted () {
-    new Swiper('.swiper-container', {
-      loop: true,
-      // 如果需要分页器
-      pagination: {
-        el: '.swiper-pagination'
+    this.getAddress()
+    this.getCategory()
+  },
+  methods: {
+    ...mapActions(['getAddress', 'getCategory'])
+  },
+  watch: {
+    categorys () {
+      // 界面更新后立即执行
+      this.$nextTick(() => {
+        new Swiper('.swiper-container', {
+          loop: true,
+          // 如果需要分页器
+          pagination: {
+            el: '.swiper-pagination'
+          }
+        })
+      })
+    }
+  },
+  computed: {
+    ...mapState(['address', 'categorys']),
+    categorysArr () {
+      const arr = []
+      for (let i = 0; i < this.categorys.length; i += 8) {
+        arr.push(this.categorys.slice(i, i + 8))
       }
-    })
+      return arr
+    }
+  },
+  data () {
+    return {
+      baseImgUrl: 'https://fuss10.elemecdn.com'
+    }
   }
 }
 </script>

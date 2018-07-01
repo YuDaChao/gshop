@@ -44,7 +44,7 @@ ajaxMethods.forEach(method => {
     return new Promise((resolve, reject) => {
       axiosIns[method](url, data)
         .then(resp => {
-          resolve(resp.data)
+          resolve(resp)
         })
     }).catch(error => {
       return Promise.reject(error)
