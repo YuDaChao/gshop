@@ -153,7 +153,7 @@ export default {
           padding-left 15px
           margin-top 7px
           .user-info-top
-            padding-bottom 8px
+            padding-bottom 15px
           .user-info-top, .profile-number
             color: #fff
           .profile-number
@@ -163,11 +163,12 @@ export default {
               width 20px
               height 24px
               margin-right 10px
+              margin-top -5px
             .icon-mobile
               font-size 30px
             .icon-mobile-number
               font-size 14px
-              vertical-align text-bottom
+              /*vertical-align text-bottom*/
 
       .arrow
         position absolute
