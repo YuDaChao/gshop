@@ -12,7 +12,7 @@
     </HanderNav>
     <!--首页头部-->
     <div class="msite-nav">
-      <div class="swiper-container">
+      <div class="swiper-container" v-if="isLoading">
        <div class="swiper-wrapper">
          <div class="swiper-slide" v-for="(categorys, index) in categorysArr" :key="index">
            <a href="javascript:" class="nav-item" v-for="(category, index) in categorys" :key="index">
@@ -24,6 +24,7 @@
         <!-- Add Pagination -->
         <div class="swiper-pagination"></div>
       </div>
+      <div class="nav-loading-bg" v-else></div>
     </div>
     <!--首页附近商家-->
     <div class="msite-shop-list">
@@ -83,6 +84,9 @@ export default {
         arr.push(this.categorys.slice(i, i + 8))
       }
       return arr
+    },
+    isLoading () {
+      return this.categorys.length
     }
   },
   data () {
@@ -163,6 +167,10 @@ export default {
             display block
             color #666
             font-size 13px
+      .nav-loading-bg
+        background url("./images/msite_back.svg") no-repeat
+        height 100%
+        width 100%
     .msite-shop-list
       background-color #fff
       margin-top 10px
