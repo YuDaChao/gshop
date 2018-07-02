@@ -35,6 +35,7 @@
       <!--商品列表-->
       <ShopList />
     </div>
+    <div id="allmap"></div>
   </div>
 </template>
 

@@ -1,8 +1,8 @@
 <template>
   <!--商品列表-->
   <div class="shop-container">
-    <ul class="shop-list" v-for="(shop, index) in shops" :key="index">
-      <li class="shop-item">
+    <ul class="shop-list" v-if="shops.length">
+      <li class="shop-item" v-for="(shop, index) in shops" :key="index">
         <div class="shop-left">
           <img :src="`${baseImgUrl}${shop.image_path}`" alt="#">
         </div>
@@ -44,6 +44,9 @@
           </section>
         </div>
       </li>
+    </ul>
+    <ul v-else>
+      <li v-for="index in 6" :key="index"><img src="./images/shop_back.svg" alt="shop"></li>
     </ul>
   </div>
 </template>
