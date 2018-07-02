@@ -6,7 +6,7 @@
       <span class="header-search" slot="left">
         <i class="iconfont icon-sousuo"></i>
       </span>
-      <span class="header-login" slot="right">
+      <span class="header-login" slot="right" @click="goLogin()">
         <span class="header-login-text">登录 | 注册</span>
       </span>
     </HanderNav>
@@ -53,9 +53,13 @@ export default {
   mounted () {
     this.getAddress()
     this.getCategory()
+    this.getShops()
   },
   methods: {
-    ...mapActions(['getAddress', 'getCategory'])
+    ...mapActions(['getAddress', 'getCategory', 'getShops']),
+    goLogin () {
+      this.$router.push('/login')
+    }
   },
   watch: {
     categorys () {

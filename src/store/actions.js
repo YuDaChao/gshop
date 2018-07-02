@@ -36,7 +36,7 @@ export default {
     const result = await getShops({latitude, longitude})
     if (result.code === 0) {
       const shops = result.data
-      commit(RECEIVE_SHOPS, shops)
+      commit(RECEIVE_SHOPS, { shops })
     }
   }
 }
