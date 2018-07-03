@@ -17,13 +17,7 @@
           </section>
           <section class="shop-rate">
             <section class="shop-rate-left">
-              <div class="star star-24">
-                <span class="star-item on"></span>
-                <span class="star-item on"></span>
-                <span class="star-item on"></span>
-                <span class="star-item half"></span>
-                <span class="star-item off"></span>
-              </div>
+              <Star :size="36" :score="shop.rating" />
               <div class="rate-section">
                 {{shop.rating}}
               </div>
@@ -53,9 +47,13 @@
 
 <script>
 import { mapState } from 'vuex'
+import Star from '../Star/Star'
 
 export default {
   name: 'ShopList',
+  components: {
+    Star
+  },
   computed: {
     ...mapState(['shops'])
   },
@@ -127,20 +125,6 @@ export default {
               display flex
               align-items center
               margin-top 3px
-              .star
-                margin-top -3px
-                .on
-                  background-image url("./images/stars/star24_on@2x.png")
-                .half
-                  background-image url("./images/stars/star24_half@2x.png")
-                .off
-                  background-image url("./images/stars/star24_off@2x.png")
-                .star-item
-                  display inline-block
-                  background-size 10px 10px
-                  background-repeat no-repeat
-                  width 10px
-                  height 10px
               .rate-section
                 font-size 10px
                 color: #ff6000
