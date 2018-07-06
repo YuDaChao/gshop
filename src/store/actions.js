@@ -1,13 +1,15 @@
 import {
   RECEIVE_SHOPS,
   RECEIVE_CATEGORYS,
-  RECEIVE_ADDRESS
+  RECEIVE_ADDRESS,
+  RECEIVE_CAPTCHA
 } from './mutation-types'
 
 import {
   getAddress,
   getFoodCategorys,
-  getShops
+  getShops,
+  getCaptcha
 } from '../api'
 
 export default {
@@ -38,5 +40,10 @@ export default {
       const shops = result.data
       commit(RECEIVE_SHOPS, { shops })
     }
+  },
+  // 获取图片验证码
+  async getPicCaptcha ({ commit }) {
+    const captcha = await getCaptcha()
+    commit(RECEIVE_CAPTCHA, { captcha })
   }
 }
