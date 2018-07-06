@@ -67,6 +67,8 @@
 // import { mapActions, mapState } from 'vuex'
 import AlertTip from '../../components/AlertTip/ALertTip'
 
+import { sendPhoneCode } from '../../api'
+
 export default {
   name: 'Login',
   components: {
@@ -90,18 +92,23 @@ export default {
     }
   },
   methods: {
-    getCode () {
-      // 如果当前时间为0 则不重新计时
-      if (!this.timeDown) {
-        this.timeDown = 30
-        this.codeBtnDisabled = true
-        // 倒计时
-        const intervalId = setInterval(() => {
-          this.timeDown--
-          if (this.timeDown <= 0) {
-            clearInterval(intervalId)
-          }
-        }, 1000)
+    async getCode () {
+      const result = await sendPhoneCode(this.phone)
+      if (result && result.code === 1) {
+        this.showALertTip(result.msg)
+      } else {
+        // 如果当前时间为0 则不重新计时
+        if (!this.timeDown) {
+          this.timeDown = 30
+          this.codeBtnDisabled = true
+          // 倒计时
+          const intervalId = setInterval(() => {
+            this.timeDown--
+            if (this.timeDown <= 0) {
+              clearInterval(intervalId)
+            }
+          }, 1000)
+        }
       }
     },
     getPicCaptcha () {
@@ -118,10 +125,12 @@ export default {
     login () {
       if (this.loginWay) {
         // 短信登录
-        const { codeBtnDisabled, code } = this
-        if (codeBtnDisabled) {
+        const { codeBtnDisabled, phone, code } = this
+        if (!phone) {
+          this.showALertTip('手机号不能为空')
+        } else if (codeBtnDisabled) {
           // 手机格式错误
-          this.showALertTip('手机格式错误')
+          this.showALertTip('手机号格式错误')
         } else if (!/^\d{6}$/.test(code)) {
           // 验证码错误
           this.showALertTip('验证码错误')

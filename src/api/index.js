@@ -15,3 +15,6 @@ export const login = (name, pwd, captcha) => request.post('/api/login_pwd', {nam
 
 // 获取一次性验证码
 export const getCaptcha = () => request.get('/api/captcha')
+
+// 发送手机验证码
+export const sendPhoneCode = (phone) => request.get(`/api/sendCode?phone=${phone}`)
