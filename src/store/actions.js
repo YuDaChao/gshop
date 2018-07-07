@@ -10,7 +10,8 @@ import {
   getAddress,
   getFoodCategorys,
   getShops,
-  getCaptcha
+  getCaptcha,
+  getUserInfo
 } from '../api'
 
 export default {
@@ -49,5 +50,12 @@ export default {
   },
   recordUser ({ commit }, userInfo) {
     commit(RECEIVE_USER_INFO, { userInfo })
+  },
+  async getUser ({ commit }) {
+    const result = await getUserInfo()
+    if (result && result.code === 0) {
+      const userInfo = result.data
+      commit(RECEIVE_USER_INFO, { userInfo })
+    }
   }
 }

@@ -21,3 +21,6 @@ export const getCaptcha = () => request.get('/api/captcha')
 
 // 发送手机验证码
 export const sendPhoneCode = (phone) => request.get(`/api/sendCode?phone=${phone}`)
+
+// 获取用户信息
+export const getUserInfo = () => request.get(`/api/userinfo`)

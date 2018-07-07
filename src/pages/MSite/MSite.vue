@@ -3,12 +3,15 @@
   <div class="msite">
     <!--首页头部-->
     <HanderNav :title="address.name">
-      <span class="header-search" slot="left">
+      <router-link class="header-search" slot="left" to="/search">
         <i class="iconfont icon-sousuo"></i>
-      </span>
-      <span class="header-login" slot="right" @click="goLogin()">
+      </router-link>
+      <router-link class="header-login" slot="right" to="/login" v-if="!userInfo._id">
         <span class="header-login-text">登录 | 注册</span>
-      </span>
+      </router-link>
+      <router-link class="header-login" slot="right" to="/login" v-else>
+        <i class="iconfont icon-person"></i>
+      </router-link>
     </HanderNav>
     <!--首页头部-->
     <div class="msite-nav">
@@ -52,16 +55,18 @@ export default {
     HanderNav,
     ShopList
   },
+  data () {
+    return {
+      baseImgUrl: 'https://fuss10.elemecdn.com'
+    }
+  },
   mounted () {
     this.getAddress()
     this.getCategory()
     this.getShops()
   },
   methods: {
-    ...mapActions(['getAddress', 'getCategory', 'getShops']),
-    goLogin () {
-      this.$router.push('/login')
-    }
+    ...mapActions(['getAddress', 'getCategory', 'getShops'])
   },
   watch: {
     categorys () {
@@ -78,7 +83,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['address', 'categorys']),
+    ...mapState(['address', 'categorys', 'userInfo']),
     categorysArr () {
       const arr = []
       for (let i = 0; i < this.categorys.length; i += 8) {
@@ -88,11 +93,6 @@ export default {
     },
     isLoading () {
       return this.categorys.length
-    }
-  },
-  data () {
-    return {
-      baseImgUrl: 'https://fuss10.elemecdn.com'
     }
   }
 }
@@ -127,6 +127,9 @@ export default {
         top 50%
         font-size 14px
         transform translateY(-50%)
+        .icon-person
+          font-size 22px
+          color: #fff
       .header-title
         position absolute
         top 50%
