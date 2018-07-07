@@ -3,7 +3,8 @@ import {
   RECEIVE_CATEGORYS,
   RECEIVE_ADDRESS,
   RECEIVE_CAPTCHA,
-  RECEIVE_USER_INFO
+  RECEIVE_USER_INFO,
+  RESET_USER_INFO
 } from './mutation-types'
 
 import {
@@ -11,7 +12,8 @@ import {
   getFoodCategorys,
   getShops,
   getCaptcha,
-  getUserInfo
+  getUserInfo,
+  logout
 } from '../api'
 
 export default {
@@ -56,6 +58,12 @@ export default {
     if (result && result.code === 0) {
       const userInfo = result.data
       commit(RECEIVE_USER_INFO, { userInfo })
+    }
+  },
+  async logout ({ commit }) {
+    const result = await logout()
+    if (result && result.code === 0) {
+      commit(RESET_USER_INFO)
     }
   }
 }

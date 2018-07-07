@@ -24,3 +24,6 @@ export const sendPhoneCode = (phone) => request.get(`/api/sendCode?phone=${phone
 
 // 获取用户信息
 export const getUserInfo = () => request.get(`/api/userinfo`)
+
+// 退出登录
+export const logout = () => request.get(`/api/logout`)

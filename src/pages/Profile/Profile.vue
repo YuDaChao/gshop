@@ -88,11 +88,15 @@
           </div>
         </a>
       </section>
+      <section class="profile_my_order border-1px" v-if="userInfo._id">
+        <mt-button type="danger" @click="logout" style="width: 100%">退出登录</mt-button>
+      </section>
     </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import { MessageBox } from 'mint-ui'
 import HeaderNav from '../../components/HanderNav/HanderNav'
 
 export default {
@@ -102,6 +106,14 @@ export default {
   },
   computed: {
     ...mapState(['userInfo'])
+  },
+  methods: {
+    logout () {
+      MessageBox.confirm('确定退出吗?').then(() => {
+        // 退出登录
+        this.$store.dispatch('logout')
+      })
+    }
   }
 }
 </script>
