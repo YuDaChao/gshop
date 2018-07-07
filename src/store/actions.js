@@ -2,7 +2,8 @@ import {
   RECEIVE_SHOPS,
   RECEIVE_CATEGORYS,
   RECEIVE_ADDRESS,
-  RECEIVE_CAPTCHA
+  RECEIVE_CAPTCHA,
+  RECEIVE_USER_INFO
 } from './mutation-types'
 
 import {
@@ -45,5 +46,8 @@ export default {
   async getPicCaptcha ({ commit }) {
     const captcha = await getCaptcha()
     commit(RECEIVE_CAPTCHA, { captcha })
+  },
+  recordUser ({ commit }, userInfo) {
+    commit(RECEIVE_USER_INFO, { userInfo })
   }
 }

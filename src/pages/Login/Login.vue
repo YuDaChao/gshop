@@ -67,7 +67,7 @@
 // import { mapActions, mapState } from 'vuex'
 import AlertTip from '../../components/AlertTip/ALertTip'
 
-import { sendPhoneCode } from '../../api'
+import { sendPhoneCode, smsLogin, login } from '../../api'
 
 export default {
   name: 'Login',
@@ -92,6 +92,7 @@ export default {
     }
   },
   methods: {
+    // 发送手机验证码
     async getCode () {
       const result = await sendPhoneCode(this.phone)
       if (result && result.code === 1) {
@@ -102,27 +103,34 @@ export default {
           this.timeDown = 30
           this.codeBtnDisabled = true
           // 倒计时
-          const intervalId = setInterval(() => {
+          this.intervalId = setInterval(() => {
             this.timeDown--
             if (this.timeDown <= 0) {
-              clearInterval(intervalId)
+              // 清除定时器
+              clearInterval(this.intervalId)
+              this.intervalId = undefined
             }
           }, 1000)
         }
       }
     },
+    // 获取图片验证码
     getPicCaptcha () {
       this.$refs.captcha.src = `http://localhost:4000/captcha?time=${Date.now()}`
     },
+    // 显示提示信息
     showALertTip (tipText) {
       this.showTip = true
       this.tipText = tipText
     },
+    // 关闭提示信息
     closeTip () {
       this.showTip = false
       this.tipText = ''
     },
-    login () {
+    // 登录
+    async login () {
+      let result
       if (this.loginWay) {
         // 短信登录
         const { codeBtnDisabled, phone, code } = this
@@ -134,6 +142,8 @@ export default {
         } else if (!/^\d{6}$/.test(code)) {
           // 验证码错误
           this.showALertTip('验证码错误')
+        } else {
+          result = await smsLogin(phone, code)
         }
       } else {
         // 账号登录
@@ -144,7 +154,27 @@ export default {
         } else if (!name || !pwd) {
           // 信息不完整
           this.showALertTip('信息不完整')
+        } else {
+          result = await login(name, pwd, captcha)
         }
+      }
+      if (this.timeDown <= 0) {
+        // 清除定时器
+        clearInterval(this.intervalId)
+        this.intervalId = undefined
+      }
+      if (result && result.code === 0) {
+        // 登录成功
+        const user = result.data
+        this.$store.dispatch('recordUser', user)
+        // 跳转到个人中心
+        this.$router.replace('/profile')
+      } else {
+        // 登录失败
+        const msg = result.msg
+        // 提示信息
+        this.showALertTip(msg)
+        this.getPicCaptcha()
       }
     }
   },

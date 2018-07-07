@@ -4,5 +4,6 @@ export default {
   address: {}, // 地址相关对象
   categorys: [], // 食品分类
   shops: [], // 商家列表
-  captcha: '' // 图片验证码
+  captcha: '', // 图片验证码
+  userInfo: {} // 用户信息
 }

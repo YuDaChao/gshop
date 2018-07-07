@@ -13,7 +13,7 @@ let axiosIns = axios.create({})
 // 添加请求拦截器
 axiosIns.interceptors.request.use(function (config) {
   // 设置请求头
-  config.headers['content-type'] = 'application/x-www-form-urlencoded'
+  // config.headers['content-type'] = 'application/x-www-form-urlencoded'
   // 如果有
   let token = window.localStorage.getItem('token')
   if (token) {
