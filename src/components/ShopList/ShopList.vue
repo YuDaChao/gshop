@@ -2,7 +2,7 @@
   <!--商品列表-->
   <div class="shop-container">
     <ul class="shop-list" v-if="shops.length">
-      <li class="shop-item" v-for="(shop, index) in shops" :key="index">
+      <li class="shop-item" v-for="(shop, index) in shops" :key="index" @click="shopDetail">
         <div class="shop-left">
           <img :src="`${baseImgUrl}${shop.image_path}`" alt="#">
         </div>
@@ -17,7 +17,7 @@
           </section>
           <section class="shop-rate">
             <section class="shop-rate-left">
-              <Star :size="36" :score="shop.rating" />
+              <Star :size="24" :score="shop.rating" />
               <div class="rate-section">
                 {{shop.rating}}
               </div>
@@ -56,6 +56,11 @@ export default {
   },
   computed: {
     ...mapState(['shops'])
+  },
+  methods: {
+    shopDetail () {
+      this.$router.push('/shop')
+    }
   },
   data () {
     return {

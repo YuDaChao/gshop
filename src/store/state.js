@@ -5,5 +5,8 @@ export default {
   categorys: [], // 食品分类
   shops: [], // 商家列表
   captcha: '', // 图片验证码
-  userInfo: {} // 用户信息
+  userInfo: {}, // 用户信息
+  shopGoods: [], // 商品列表
+  shopRatings: [], // 评论
+  shopInfo: {} // 商家信息
 }

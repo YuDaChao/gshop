@@ -5,6 +5,8 @@ import App from './App'
 import router from './router'
 import store from './store'
 
+import './mock/mockServer'
+
 // 注册全局Button
 Vue.component(Button.name, Button)
 

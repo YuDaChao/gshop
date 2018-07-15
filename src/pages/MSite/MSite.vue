@@ -103,6 +103,7 @@ export default {
   .msite
     width 100%
     padding-bottom 50px
+    background-color #f5f5f5
     .header
       position fixed
       top: 0

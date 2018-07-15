@@ -22,6 +22,9 @@ export default {
 <style scoped lang="stylus" rel="stylesheet/stylus">
   .search
     overflow hidden
+    width: 100%;
+    height: 100%;
+    background-color #f5f5f5
     .header
       position fixed
       top: 0

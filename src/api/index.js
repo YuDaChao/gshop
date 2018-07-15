@@ -27,3 +27,12 @@ export const getUserInfo = () => request.get(`/api/userinfo`)
 
 // 退出登录
 export const logout = () => request.get(`/api/logout`)
+
+// 获取商品列表
+export const getShopGoods = () => request.get('/goods')
+
+// 获取评论列表
+export const getShopRatings = () => request.get('/ratings')
+
+// 获取商家
+export const getShopInfo = () => request.get('/info')

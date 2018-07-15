@@ -123,6 +123,7 @@ export default {
   .profile
     width 100%
     height 100%
+    background-color #f5f5f5
     .header
       position fixed
       top: 0
