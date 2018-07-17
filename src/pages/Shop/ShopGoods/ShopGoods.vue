@@ -2,7 +2,13 @@
   <div class="goods">
     <div class="menu-wrapper">
       <ul class="menu-content">
-        <li class="menu-item" v-for="(good, index) in shopGoods" :key="index">
+        <li
+          class="menu-item"
+          v-for="(good, index) in shopGoods"
+          :key="index"
+          :class="{current: index === currentIndex}"
+          @click="changeCurrentIndex(index)"
+        >
           <span class="category">
             <img class="icon" :src="good.icon" alt="#" v-show="good.icon">
             <span class="name">{{good.name}}</span>
@@ -11,7 +17,7 @@
       </ul>
     </div>
     <div class="foods-wrapper">
-      <ul>
+      <ul ref="foodsUl">
         <li class="shop-good" v-for="(shopGood, index) in shopGoods" :key="index">
           <h1 class="title">{{shopGood.name}}</h1>
           <ul>
@@ -46,22 +52,70 @@ import { mapActions, mapState } from 'vuex'
 export default {
   name: 'ShopGoods',
   data () {
-    return {}
+    return {
+      tops: [],
+      scrollY: 0
+    }
   },
   mounted () {
     // this.getShopGoods()
     this.$store.dispatch('getShopGoods', () => { // 更新数据后执行
       this.$nextTick(() => { // 页面渲染完成后执行
-        new BetterScroll('.menu-wrapper')
-        new BetterScroll('.foods-wrapper')
+        this._initScroll()
+        this._initTops()
       })
     })
   },
   methods: {
-    ...mapActions(['getShopGoods'])
+    ...mapActions(['getShopGoods']),
+    changeCurrentIndex (index) {
+      const scrollY = this.tops[index]
+      this.scrollY = scrollY
+      this.foodsScroll.scrollTo(0, -scrollY, 300)
+    },
+    // 初始化滚动条
+    _initScroll () {
+      new BetterScroll('.menu-wrapper', {
+        click: true
+      })
+      this.foodsScroll = new BetterScroll('.foods-wrapper', {
+        click: true,
+        probeType: 2 // 派发scroll事件
+      })
+
+      // 监听滚动事件
+      this.foodsScroll.on('scroll', ({x, y}) => {
+        this.scrollY = Math.abs(y)
+      })
+      // 监听滚动完成
+      this.foodsScroll.on('scrollEnd', ({x, y}) => {
+        this.scrollY = Math.abs(y)
+      })
+    },
+    _initTops () {
+      const tops = []
+      let top = 0
+      tops.push(top)
+      // 获取所有li
+      const lis = this.$refs.foodsUl.children
+      Array.prototype.slice.call(lis).forEach(li => {
+        top += li.clientHeight
+        tops.push(top)
+      })
+      // 更新数据
+      this.tops = tops
+    }
   },
+  // 初始化执行一次  相关属性变化执行
   computed: {
-    ...mapState(['shopGoods'])
+    ...mapState(['shopGoods']),
+    currentIndex () {
+      const { scrollY, tops } = this
+      const index = tops.findIndex((top, index) => {
+        return scrollY >= top && scrollY < tops[index + 1]
+      })
+      return index
+    }
   }
 }
 </script>
@@ -88,6 +142,9 @@ export default {
           line-height 14px
           padding 0 12px
           bottom-border-1px(#ddd)
+          &.current
+            background #fff
+            color: #02a774
           .icon
             display inline-block
             vertical-align top
