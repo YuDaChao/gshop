@@ -37,6 +37,9 @@
                   <span class="old" v-show="food.oldPrice">¥{{food.oldPrice}}</span>
                 </div>
               </div>
+              <div class="cart-control-wrapper">
+                <CartControl :food="food" />
+              </div>
             </li>
           </ul>
         </li>
@@ -48,9 +51,13 @@
 <script>
 import BetterScroll from 'better-scroll'
 import { mapActions, mapState } from 'vuex'
+import CartControl from '../../../components/CartControl/CartControl'
 
 export default {
   name: 'ShopGoods',
+  components: {
+    CartControl
+  },
   data () {
     return {
       tops: [],
@@ -169,6 +176,7 @@ export default {
           color rgb(147, 153, 159)
           background #f3f5f7
         .food-item
+          position relative
           display flex
           margin 18px
           padding-bottom 18px
@@ -211,4 +219,8 @@ export default {
                 text-decoration line-through
                 font-size 10px
                 color rgb(147, 153, 159)
+          .cart-control-wrapper
+            position absolute
+            bottom 15px
+            right 0
 </style>

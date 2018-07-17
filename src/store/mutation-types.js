@@ -15,3 +15,7 @@ export const RECEIVE_SHOP_GOODS = 'receive_shop_goods' // 商品列表
 export const RECEIVE_SHOP_RATINGS = 'receive_shop_ratings' // 商品列表
 
 export const RECEIVE_SHOP_INFO = 'receive_shop_info' // 商品列表
+
+export const INCREMENT_FOOD_COUNT = 'increment_food_count' //  添加
+
+export const DECREMENT_FOOD_COUNT = 'decrement_food_count' // 减少
