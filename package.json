@@ -15,6 +15,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "better-scroll": "^1.12.4",
+    "dayjs": "^1.7.4",
     "mint-ui": "^2.2.13",
     "qs": "^6.5.2",
     "swiper": "^4.3.3",

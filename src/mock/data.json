@@ -86,21 +86,28 @@
             {
               "username": "3******c",
               "rateTime": 1469281964000,
-              "rateType": 0,
+              "rateType": 1,
               "text": "很喜欢的粥",
               "avatar": "http://static.galileo.xiaojukeji.com/static/tms/default_header.png"
             },
             {
               "username": "2******3",
               "rateTime": 1469271264000,
-              "rateType": 0,
-              "text": "",
+              "rateType": 1,
+              "text": "非常棒， 下次还会再来。。。。",
               "avatar": "http://static.galileo.xiaojukeji.com/static/tms/default_header.png"
             },
             {
               "username": "3******b",
               "rateTime": 1469261964000,
-              "rateType": 1,
+              "rateType": 0,
+              "text": "不好吃。。。。",
+              "avatar": "http://static.galileo.xiaojukeji.com/static/tms/default_header.png"
+            },
+            {
+              "username": "3******b",
+              "rateTime": 1469261964000,
+              "rateType": 0,
               "text": "",
               "avatar": "http://static.galileo.xiaojukeji.com/static/tms/default_header.png"
             }
@@ -126,21 +133,21 @@
               "username": "3******c",
               "rateTime": 1469281964000,
               "rateType": 0,
-              "text": "",
+              "text": "美肤粥对皮肤有很好的保养作用",
               "avatar": "http://static.galileo.xiaojukeji.com/static/tms/default_header.png"
             },
             {
               "username": "2******3",
               "rateTime": 1469271264000,
               "rateType": 0,
-              "text": "",
+              "text": "非常棒， 下次还会再来。。。。",
               "avatar": "http://static.galileo.xiaojukeji.com/static/tms/default_header.png"
             },
             {
               "username": "3******b",
               "rateTime": 1469261964000,
               "rateType": 0,
-              "text": "",
+              "text": "不好吃。。。。",
               "avatar": "http://static.galileo.xiaojukeji.com/static/tms/default_header.png"
             }
           ],

@@ -6,6 +6,7 @@ import router from './router'
 import store from './store'
 
 import './mock/mockServer'
+import './common/stylus/icon.styl'
 
 // 注册全局Button
 Vue.component(Button.name, Button)

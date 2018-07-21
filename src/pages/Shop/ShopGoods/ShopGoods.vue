@@ -21,7 +21,12 @@
         <li class="shop-good" v-for="(shopGood, index) in shopGoods" :key="index">
           <h1 class="title">{{shopGood.name}}</h1>
           <ul>
-            <li class="food-item" v-for="(food, index) in shopGood.foods" :key="index">
+            <li
+              class="food-item"
+              v-for="(food, index) in shopGood.foods"
+              :key="index"
+              @click="handleSelectFood(food)"
+            >
               <div>
                 <img class="icon" width="57" height="57" :src="food.image" alt="">
               </div>
@@ -45,6 +50,7 @@
         </li>
       </ul>
     </div>
+    <Food :food="selectedFood" ref="food" />
   </div>
 </template>
 
@@ -52,16 +58,19 @@
 import BetterScroll from 'better-scroll'
 import { mapActions, mapState } from 'vuex'
 import CartControl from '../../../components/CartControl/CartControl'
+import Food from '../../../components/Food/Food'
 
 export default {
   name: 'ShopGoods',
   components: {
-    CartControl
+    CartControl,
+    Food
   },
   data () {
     return {
       tops: [],
-      scrollY: 0
+      scrollY: 0,
+      selectedFood: {}
     }
   },
   mounted () {
@@ -79,6 +88,11 @@ export default {
       const scrollY = this.tops[index]
       this.scrollY = scrollY
       this.foodsScroll.scrollTo(0, -scrollY, 300)
+    },
+    handleSelectFood (food) {
+      this.selectedFood = food
+      // 父组件调用子组件方法
+      this.$refs.food.showFood()
     },
     // 初始化滚动条
     _initScroll () {
@@ -133,7 +147,7 @@ export default {
     display flex
     position absolute
     top 184px
-    bottom 46px
+    bottom 47px
     width 100%
     overflow hidden
     .menu-wrapper
