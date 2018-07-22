@@ -5,14 +5,14 @@
         <img width="64" height="64" :src="shopInfo.avatar" alt="#">
       </div>
       <div class="content">
-        <div class="title">
+        <div class="title hidden">
           <span class="brand"></span>
           <span class="name">{{shopInfo.name}}</span>
         </div>
-        <div class="description">
+        <div class="description hidden">
           {{shopInfo.description}}/{{shopInfo.deliveryTime}}分钟
         </div>
-        <div class="support" v-if="shopInfo.supports">
+        <div class="support hidden" v-if="shopInfo.supports">
           <span class="icon" :class="iconMap[shopInfo.supports[0].type]"></span>
           <span class="text">{{shopInfo.supports[0].content}}</span>
         </div>
@@ -98,15 +98,21 @@ export default {
       padding 24px 12px 18px 24px
       font-size 0
       .avatar
+        position absolute
+        top 24px
+        left 24px
         display inline-block
         vertical-align top
         border-radius 2px
         img
           border-radius 2px
       .content
-        display inline-block
         font-size 14px
-        margin-left 16px
+        padding 0 60px 0 80px
+        .hidden
+          overflow hidden
+          text-overflow ellipsis
+          white-space nowrap
         .title
           padding 2px 0 8px
           .brand
@@ -164,10 +170,13 @@ export default {
         text-align center
         cursor pointer
         .count
+          display inline-block
+          vertical-align top
           font-size 10px
         .icon-jiantou1
-          font-size 10px
+          font-size 14px
           margin-left 3px
+          vertical-align middle
     .bulletin-wrapper
       position relative
       height 28px
@@ -192,8 +201,9 @@ export default {
         vertical-align top
       .icon-jiantou1
         position absolute
-        font-size 10px
+        font-size 14px
         right 12px
+        top 12px
     .bg
       img
         width 100%

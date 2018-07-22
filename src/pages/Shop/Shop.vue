@@ -28,13 +28,14 @@ export default {
   },
   mounted () {
     this.getShopInfo()
+    this.getShopRatings()
   },
   data () {
     return {
     }
   },
   methods: {
-    ...mapActions(['getShopInfo'])
+    ...mapActions(['getShopInfo', 'getShopRatings'])
   },
   computed: {
     ...mapState(['shopInfo'])
@@ -46,18 +47,18 @@ export default {
   @import '../../common/stylus/mixins.styl'
   .shop
     .nav
-      width 100%
-      display flex
-      height 38px
-      line-height 38px
-      bottom-border-1px(#e4e4e4)
-    .nav-item
-      width 33.3333333%
-      text-align center
-      a
-        padding 0 10px 5px
-        font-size 15px
-      .router-link-active
-        color: #02a774
-        border-bottom 3px solid #02a774
+        width 100%
+        display flex
+        height 38px
+        line-height 38px
+        bottom-border-1px(#e4e4e4)
+      .nav-item
+        width 33.3333333%
+        text-align center
+        a
+          padding 0 10px 5px
+          font-size 15px
+        .router-link-active
+          color: #02a774
+          border-bottom 3px solid #02a774
 </style>

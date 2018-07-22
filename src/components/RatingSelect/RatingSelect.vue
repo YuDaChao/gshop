@@ -1,36 +1,13 @@
 <template>
   <div class="rating-select">
-    <div class="rating-type">
-      <span
-        class="btn positive"
-        :class="{active: selectType === 2}"
-        @click="handleChangeSelectType(2)"
-      >
-        {{desc.all}}<span class="count">{{ratings.length}}</span>
-      </span>
-      <span
-        class="btn positive"
-        :class="{active: selectType === 1}"
-        @click="handleChangeSelectType(1)"
-      >
-        {{desc.positive}}<span class="count">{{positives.length}}</span>
-      </span>
-      <span
-        class="btn negative"
-        :class="{active: selectType === 0}"
-        @click="handleChangeSelectType(0)"
-      >
-        {{desc.negative}}<span class="count">{{negatives.length}}</span>
-      </span>
-    </div>
-    <div
-      class="switch"
-      :class="{on: onlyContent}"
-      @click="handleChangeToggle"
-    >
-      <span class="icon-check_circle"></span>
-      <span class="text">只看有内容的评论</span>
-    </div>
+    <RatingHeader
+      :selectType="selectType"
+      :desc="desc"
+      :ratings="ratings"
+      :onlyContent="onlyContent"
+      @handleChangeSelectType="handleChangeSelectType"
+      @handleChangeToggle="handleChangeToggle"
+    />
     <div class="rating-wrapper">
       <ul v-if="ratings.length">
         <li
@@ -57,9 +34,8 @@
 
 <script>
 import dayjs from 'dayjs'
+import RatingHeader from '../../components/RatingHeader/RatingHeader'
 
-const POSITIVE = 1
-const NEGATIVE = 0
 const ALL = 2
 
 export default {
@@ -92,13 +68,8 @@ export default {
       }
     }
   },
-  computed: {
-    positives () {
-      return this.ratings.filter(rating => rating.rateType === POSITIVE)
-    },
-    negatives () {
-      return this.ratings.filter(rating => rating.rateType === NEGATIVE)
-    }
+  components: {
+    RatingHeader
   },
   methods: {
     handleChangeSelectType (type) {
@@ -131,48 +102,6 @@ export default {
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
   .rating-select
-    .rating-type
-      margin 0 18px
-      padding 18px 0
-      font-size 0
-      border-bottom 1px solid rgba(7, 17, 27, 0.1)
-      .btn
-        font-size 12px
-        color: rgb(77, 85, 93)
-        display inline-block
-        line-height 16px
-        padding 8px 12px
-        border-radius 2px
-        &.active
-          color: #fff
-        .count
-          font-size 8px
-          margin-left 2px
-        &.positive
-          margin-right 8px
-          background rgba(0, 160, 200, 0.2)
-          &.active
-            background rgba(0, 160, 200, 1)
-        &.negative
-          background rgba(77, 85, 93, 0.2)
-          &.active
-            background rgba(77, 85, 93, 1)
-    .switch
-      padding 12px 18px
-      line-height 24px
-      font-size 0
-      color rgb(147, 153, 159)
-      border-bottom 1px solid rgba(7, 17, 27, 0.1)
-      &.on
-        .icon-check_circle
-          color: #02a774
-      .icon-check_circle
-        font-size 24px
-        margin-right 4px
-        display: inline-block
-        vertical-align: top
-      .text
-        font-size 12px
     .rating-wrapper
       padding 16px 0
       .rating-item

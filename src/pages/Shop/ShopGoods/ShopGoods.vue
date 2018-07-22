@@ -1,57 +1,59 @@
 <template>
-  <div class="goods">
-    <div class="menu-wrapper">
-      <ul class="menu-content">
-        <li
-          class="menu-item"
-          v-for="(good, index) in shopGoods"
-          :key="index"
-          :class="{current: index === currentIndex}"
-          @click="changeCurrentIndex(index)"
-        >
+  <transition name="goodsFade">
+    <div class="goods">
+      <div class="menu-wrapper">
+        <ul class="menu-content">
+          <li
+            class="menu-item"
+            v-for="(good, index) in shopGoods"
+            :key="index"
+            :class="{current: index === currentIndex}"
+            @click="changeCurrentIndex(index)"
+          >
           <span class="category">
             <img class="icon" :src="good.icon" alt="#" v-show="good.icon">
             <span class="name">{{good.name}}</span>
           </span>
-        </li>
-      </ul>
-    </div>
-    <div class="foods-wrapper">
-      <ul ref="foodsUl">
-        <li class="shop-good" v-for="(shopGood, index) in shopGoods" :key="index">
-          <h1 class="title">{{shopGood.name}}</h1>
-          <ul>
-            <li
-              class="food-item"
-              v-for="(food, index) in shopGood.foods"
-              :key="index"
-              @click="handleSelectFood(food)"
-            >
-              <div>
-                <img class="icon" width="57" height="57" :src="food.image" alt="">
-              </div>
-              <div class="content">
-                <div class="name">{{food.name}}</div>
-                <div class="desc">{{food.description}}</div>
-                <div class="extra">
-                  <span class="sell-count">月售{{food.sellCount}}分</span>
-                  <span class="rating">好评{{food.rating}}%</span>
+          </li>
+        </ul>
+      </div>
+      <div class="foods-wrapper">
+        <ul ref="foodsUl">
+          <li class="shop-good" v-for="(shopGood, index) in shopGoods" :key="index">
+            <h1 class="title">{{shopGood.name}}</h1>
+            <ul>
+              <li
+                class="food-item"
+                v-for="(food, index) in shopGood.foods"
+                :key="index"
+                @click="handleSelectFood(food)"
+              >
+                <div>
+                  <img class="icon" width="57" height="57" :src="food.image" alt="">
                 </div>
-                <div class="price">
-                  <span class="now">¥{{food.price}}</span>
-                  <span class="old" v-show="food.oldPrice">¥{{food.oldPrice}}</span>
+                <div class="content">
+                  <div class="name">{{food.name}}</div>
+                  <div class="desc">{{food.description}}</div>
+                  <div class="extra">
+                    <span class="sell-count">月售{{food.sellCount}}分</span>
+                    <span class="rating">好评{{food.rating}}%</span>
+                  </div>
+                  <div class="price">
+                    <span class="now">¥{{food.price}}</span>
+                    <span class="old" v-show="food.oldPrice">¥{{food.oldPrice}}</span>
+                  </div>
                 </div>
-              </div>
-              <div class="cart-control-wrapper">
-                <CartControl :food="food" />
-              </div>
-            </li>
-          </ul>
-        </li>
-      </ul>
+                <div class="cart-control-wrapper">
+                  <CartControl :food="food" />
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <Food :food="selectedFood" ref="food" />
     </div>
-    <Food :food="selectedFood" ref="food" />
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -150,6 +152,11 @@ export default {
     bottom 47px
     width 100%
     overflow hidden
+    transition all 0.2s linear
+    &.goodsFade-enter-active, &.goodsFade-enter-active
+      transform translate3d(0, 0, 0)
+    &.goodsFade-enter, &.goodsFade-enter-to
+      transform translate3d(100%, 0, 0)
     .menu-wrapper
       flex 0 0 80px
       width 80px
