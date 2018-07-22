@@ -71,7 +71,7 @@
 <script>
 import BScroll from 'better-scroll'
 import dayjs from 'dayjs'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import Star from '../../../components/Star/Star'
 import Split from '../../../components/Split/Split'
 import RatingHeader from '../../../components/RatingHeader/RatingHeader'
@@ -97,14 +97,28 @@ export default {
     }
   },
   mounted () {
-    new BScroll('.ratings', {
-      click: true
-    })
+    this.getShopRatings()
+    this._initScroll()
   },
   computed: {
-    ...mapState(['shopInfo', 'shopRatings'])
+    ...mapState(['shopRatings', 'shopInfo'])
+  },
+  watch: {
+    shopRatings () {
+      this._initScroll()
+    }
   },
   methods: {
+    ...mapActions(['getShopRatings']),
+    _initScroll () {
+      if (!this.scroll) {
+        this.scroll = new BScroll('.ratings', {
+          click: true
+        })
+      } else {
+        this.scroll.refresh()
+      }
+    },
     handleChangeSelectType (type) {
       this.selectType = type
     },

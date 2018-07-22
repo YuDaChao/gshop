@@ -12,7 +12,9 @@
           <router-link to="/shop/info">商家</router-link>
         </li>
       </ul>
-      <router-view></router-view>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
     </div>
 </template>
 
@@ -28,14 +30,9 @@ export default {
   },
   mounted () {
     this.getShopInfo()
-    this.getShopRatings()
-  },
-  data () {
-    return {
-    }
   },
   methods: {
-    ...mapActions(['getShopInfo', 'getShopRatings'])
+    ...mapActions(['getShopInfo'])
   },
   computed: {
     ...mapState(['shopInfo'])
