@@ -4,19 +4,19 @@
       <div class="content">
         <div class="content-left">
           <div class="logo-wrapper">
-            <div class="logo">
-              <i class="iconfont icon-shopping_cart" ></i>
+            <div class="logo" :class="{highlight: totalCount}">
+              <i class="iconfont icon-shopping_cart" :class="{highlight: totalCount}"></i>
             </div>
-            <div class="num">3</div>
+            <div class="num" v-show="totalCount">{{totalCount}}</div>
           </div>
           <div class="cart-center">
-            <div class="price">￥30</div>
-            <div class="desc">另需配送费￥4元</div>
+            <div class="price" :class="{highlight: totalCount}">￥{{totalPrice}}</div>
+            <div class="desc">另需配送费￥{{shopInfo.deliveryPrice}}元</div>
           </div>
         </div>
         <div class="content-right">
-          <div class="pay not-enough">
-            还差¥20起送
+          <div class="pay" :class="payClass">
+            {{payText}}
           </div>
         </div>
       </div>
@@ -25,8 +25,25 @@
 </template>
 
 <script>
+import { mapGetters, mapState } from 'vuex'
 export default {
-  name: 'Cart'
+  name: 'Cart',
+  computed: {
+    ...mapState(['shopCart', 'shopInfo']),
+    ...mapGetters(['totalCount', 'totalPrice']),
+    payClass () {
+      return this.totalPrice > this.shopInfo.minPrice ? 'enough' : 'not-enough'
+    },
+    payText () {
+      if (this.totalPrice === 0) {
+        return `¥${this.shopInfo.minPrice}元起送`
+      } else if (this.totalPrice < this.shopInfo.minPrice) {
+        return `还差${this.shopInfo.minPrice - this.totalPrice}元`
+      } else {
+        return '提交'
+      }
+    }
+  }
 }
 </script>
 
