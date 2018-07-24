@@ -51,6 +51,7 @@
           </li>
         </ul>
       </div>
+      <Cart />
       <Food :food="selectedFood" ref="food" />
     </div>
   </transition>
@@ -61,12 +62,14 @@ import BetterScroll from 'better-scroll'
 import { mapActions, mapState } from 'vuex'
 import CartControl from '../../../components/CartControl/CartControl'
 import Food from '../../../components/Food/Food'
+import Cart from '../../../components/Cart/Cart'
 
 export default {
   name: 'ShopGoods',
   components: {
     CartControl,
-    Food
+    Food,
+    Cart
   },
   data () {
     return {
