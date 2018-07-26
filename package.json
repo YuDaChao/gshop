@@ -17,6 +17,8 @@
     "better-scroll": "^1.12.4",
     "dayjs": "^1.7.4",
     "mint-ui": "^2.2.13",
+    "postcss-px2rem": "^0.3.0",
+    "px2rem-loader": "^0.1.9",
     "qs": "^6.5.2",
     "swiper": "^4.3.3",
     "vue": "^2.5.2",

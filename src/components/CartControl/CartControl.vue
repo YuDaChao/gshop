@@ -1,5 +1,5 @@
 <template>
-  <div class="cart-controller">
+  <div class="cart-controller" ref="cart">
     <transition name="decrement">
       <div class="iconfont icon-remove_circle_outline" v-if="food.count" @click.stop.prevent="updateFoodCount(false)"></div>
     </transition>
@@ -17,6 +17,9 @@ export default {
   methods: {
     updateFoodCount (isAdd) {
       this.$store.dispatch('updateFoodCount', {isAdd, food: this.food})
+      if (isAdd) {
+        this.$emit('drop', this.$refs.cart)
+      }
     }
   }
 }

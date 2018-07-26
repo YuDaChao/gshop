@@ -1,11 +1,15 @@
 <template>
-  <header class="header">
-    <slot name="left"></slot>
-    <span class="header-title">
-      <span class="header-title-text ellipsis">{{title}}</span>
-    </span>
-    <slot name="right"></slot>
-  </header>
+  <!--<header class="header">-->
+    <!--<slot name="left"></slot>-->
+    <!--<span class="header-title">-->
+      <!--<span class="header-title-text ellipsis">{{title}}</span>-->
+    <!--</span>-->
+    <!--<slot name="right"></slot>-->
+  <!--</header>-->
+  <mt-header class="header" :title="title">
+    <mt-button slot="left"><slot name="left"></slot></mt-button>
+    <mt-button slot="right"><slot name="right"></slot></mt-button>
+  </mt-header>
 </template>
 
 <script>

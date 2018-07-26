@@ -3,13 +3,13 @@
   <div class="msite">
     <!--首页头部-->
     <HanderNav :title="address.name">
-      <router-link class="header-search" slot="left" to="/search">
+      <router-link slot="left" to="/search">
         <i class="iconfont icon-sousuo"></i>
       </router-link>
-      <router-link class="header-login" slot="right" to="/login" v-if="!userInfo._id">
+      <router-link slot="right" to="/login" v-if="!userInfo._id">
         <span class="header-login-text">登录 | 注册</span>
       </router-link>
-      <router-link class="header-login" slot="right" to="/login" v-else>
+      <router-link slot="right" to="/login" v-else>
         <i class="iconfont icon-person"></i>
       </router-link>
     </HanderNav>
@@ -173,7 +173,7 @@ export default {
             color #666
             font-size 13px
       .nav-loading-bg
-        background url("./images/msite_back.svg") no-repeat
+        background url(require('./images/msite_back.svg')) no-repeat
         height 100%
         width 100%
     .msite-shop-list
