@@ -11,7 +11,7 @@
             @click="changeCurrentIndex(index)"
           >
           <span class="category">
-            <img class="icon" :src="good.icon" alt="#" v-show="good.icon">
+            <img class="icon" v-lazy="good.icon" alt="#" v-show="good.icon">
             <span class="name">{{good.name}}</span>
           </span>
           </li>
@@ -29,7 +29,7 @@
                 @click="handleSelectFood(food)"
               >
                 <div>
-                  <img class="icon" width="57" height="57" :src="food.image" alt="">
+                  <img class="icon" width="57" height="57" v-lazy="food.image" alt="">
                 </div>
                 <div class="content">
                   <div class="name">{{food.name}}</div>
